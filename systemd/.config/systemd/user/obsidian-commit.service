@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto-commit Obsidian vault changes
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/obsidian-auto-commit.sh
