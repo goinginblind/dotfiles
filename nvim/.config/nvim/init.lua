@@ -204,7 +204,7 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
-      delay = 0,
+      delay = 750,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
@@ -748,16 +748,14 @@ require('lazy').setup({
 
   { -- Setup colorscheme to Catppuccin Mocha
     'catppuccin/nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    priority = 1000,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
       require('catppuccin').setup {
         flavour = 'mocha',
         float = {
-          transparent = true, -- enable transparent floating windows
-          solid = false, -- use solid styling for floating windows, see |winborder|
+          transparent = true,
+          solid = false,
         },
-
         auto_integrations = false,
         integrations = {
           cmp = true,
@@ -769,9 +767,22 @@ require('lazy').setup({
             indentscope_color = '',
           },
         },
+        -- START OF CHANGES
+        custom_highlights = function(colors)
+          return {
+
+            BlinkCmpMenu = { bg = colors.base }, -- Main Completion Menu
+            BlinkCmpMenuBorder = { fg = colors.blue, bg = colors.base },
+
+            BlinkCmpDoc = { bg = colors.base }, -- Documentation Popup
+            BlinkCmpDocBorder = { fg = colors.blue, bg = colors.base },
+
+            -- 3. Signature Help (the little popup for function args)
+            BlinkCmpSignatureHelp = { bg = colors.base },
+            BlinkCmpSignatureHelpBorder = { fg = colors.blue, bg = colors.base },
+          }
+        end,
       }
-      vim.api.nvim_set_hl(0, 'CmpBorder', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'CmpDocBorder', { bg = 'none' })
       vim.cmd.colorscheme 'catppuccin'
     end,
   },
