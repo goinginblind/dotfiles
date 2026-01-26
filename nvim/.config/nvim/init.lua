@@ -483,6 +483,7 @@ require('lazy').setup({
         virtual_text = {
           source = 'if_many',
           spacing = 2,
+          prefix = '!',
           format = function(diagnostic)
             local diagnostic_message = {
               [vim.diagnostic.severity.ERROR] = diagnostic.message,
@@ -757,6 +758,7 @@ require('lazy').setup({
           solid = false,
         },
         auto_integrations = false,
+        no_italic = true,
         integrations = {
           cmp = true,
           gitsigns = true,
@@ -766,8 +768,10 @@ require('lazy').setup({
             enabled = true,
             indentscope_color = '',
           },
+          telescope = {
+            enabled = true,
+          },
         },
-        -- START OF CHANGES
         custom_highlights = function(colors)
           return {
 
@@ -777,8 +781,7 @@ require('lazy').setup({
             BlinkCmpDoc = { bg = colors.base }, -- Documentation Popup
             BlinkCmpDocBorder = { fg = colors.blue, bg = colors.base },
 
-            -- 3. Signature Help (the little popup for function args)
-            BlinkCmpSignatureHelp = { bg = colors.base },
+            BlinkCmpSignatureHelp = { bg = colors.base }, -- Signature Help
             BlinkCmpSignatureHelpBorder = { fg = colors.blue, bg = colors.base },
           }
         end,
