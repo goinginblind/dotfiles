@@ -68,8 +68,14 @@ window#waybar {
   color: #ffffff; 
 }
 
-#cpu, #memory, #battery {
+#cpu, #memory {
   padding: 0 6px;
+  background-color: transparent;
+  color: #98c379;
+}
+
+#battery {
+  padding: 0 10px 0 6px;
   background-color: transparent;
   color: #98c379;
 }
