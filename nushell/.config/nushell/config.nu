@@ -2,215 +2,231 @@
 #
 # Installed by:
 # version = "0.108.0"
-#
-# This file is used to override default Nushell settings, define
-# (or import) custom commands, or run any other startup tasks.
-# See https://www.nushell.sh/book/configuration.html
-#
-# Nushell sets "sensible defaults" for most configuration settings, 
-# so your `config.nu` only needs to override these defaults if desired.
-#
-# You can open this file in your default editor using:
-#     config nu
-#
-# You can also pretty-print and page through the documentation for configuration
-# options using:
-#     config nu --doc | nu-highlight | less -R
+
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
-# Define the Catppuccin Mocha Theme
-let catppuccin_theme = {
-    separator: "#9399b2" # overlay2
-    leading_trailing_space_bg: { attr: "n" }
-    header: { fg: "#a6e3a1" attr: "b" } # green_bold
-    empty: "#89b4fa" # blue
-    bool: "#f9e2af" # yellow
-    int: "#fab387" # peach
-    filesize: "#89dceb" # sky
-    duration: "#cdd6f4" # text
-    date: "#cba6f7" # mauve
-    range: "#94e2d5" # teal
-    float: "#fab387" # peach
-    string: "#a6e3a1" # green
-    nothing: "#9399b2" # overlay2
-    binary: "#fab387" # peach
-    cell-path: "#cdd6f4" # text
-    row_index: { fg: "#a6e3a1" attr: "b" } # green_bold
-    record: "#cdd6f4" # text
-    list: "#cdd6f4" # text
-    block: "#cdd6f4" # text
-    hints: "#6c7086" # overlay0
-    search_result: { fg: "#1e1e2e" bg: "#f9e2af" } # base on yellow
-    shape_and: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_binary: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_block: { fg: "#89b4fa" attr: "b" } # blue_bold
-    shape_bool: "#94e2d5" # teal
-    shape_closure: { fg: "#a6e3a1" attr: "b" } # green_bold
-    shape_custom: "#a6e3a1" # green
-    shape_datetime: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_directory: "#89dceb" # sky
-    shape_external: "#89dceb" # sky
-    shape_externalarg: { fg: "#a6e3a1" attr: "b" } # green_bold
-    shape_external_resolved: { fg: "#f9e2af" attr: "b" } # yellow_bold
-    shape_filepath: "#89dceb" # sky
-    shape_flag: { fg: "#89b4fa" attr: "b" } # blue_bold
-    shape_float: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_garbage: { fg: "#cdd6f4" bg: "#f38ba8" attr: "b" } # text on red
-    shape_glob_interpolation: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_globpattern: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_int: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_internalcall: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_keyword: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_list: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_literal: "#89b4fa" # blue
-    shape_match_pattern: "#a6e3a1" # green
-    shape_matching_brackets: { attr: "u" }
-    shape_nothing: "#94e2d5" # teal
-    shape_operator: "#f9e2af" # yellow
-    shape_or: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_pipe: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_range: { fg: "#f9e2af" attr: "b" } # yellow_bold
-    shape_record: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_redirection: { fg: "#cba6f7" attr: "b" } # mauve_bold
-    shape_signature: { fg: "#a6e3a1" attr: "b" } # green_bold
-    shape_string: "#a6e3a1" # green
-    shape_string_interpolation: { fg: "#89dceb" attr: "b" } # sky_bold
-    shape_table: { fg: "#89b4fa" attr: "b" } # blue_bold
-    shape_variable: "#cba6f7" # mauve
-    shape_vardecl: "#cba6f7" # mauve
-    shape_raw_string: "#f5e0dc" # rosewater
+# >>>>>>>>>>>>>>>>>>>>> THEME DEFINITION >>>>>>>>>>>>>>>>>>>>>>>
+
+# Define the Palette
+let theme = {
+    rosewater: "#f5e0dc"
+    flamingo: "#f2cdcd"
+    pink: "#f5c2e7"
+    mauve: "#cba6f7"
+    red: "#f38ba8"
+    maroon: "#eba0ac"
+    peach: "#fab387"
+    yellow: "#f9e2af"
+    green: "#a6e3a1"
+    teal: "#94e2d5"
+    sky: "#89dceb"
+    sapphire: "#74c7ec"
+    blue: "#89b4fa"
+    lavender: "#b4befe"
+    text: "#cdd6f4"
+    subtext1: "#bac2de"
+    subtext0: "#a6adc8"
+    overlay2: "#9399b2"
+    overlay1: "#7f849c"
+    overlay0: "#6c7086"
+    surface2: "#585b70"
+    surface1: "#45475a"
+    surface0: "#313244"
+    base: "#1e1e2e"
+    mantle: "#181825"
+    crust: "#11111b"
 }
 
+# Define the Scheme
+let scheme = {
+    recognized_command: $theme.blue
+    unrecognized_command: $theme.text
+    constant: $theme.peach
+    punctuation: $theme.overlay2
+    operator: $theme.sky
+    string: $theme.green
+    virtual_text: $theme.surface2
+    variable: { fg: $theme.flamingo attr: i }
+    filepath: $theme.yellow
+}
+
+# Build the actual NuShell color configuration record
+let catppuccin_color_config = {
+    separator: { fg: $theme.surface2 attr: b }
+    leading_trailing_space_bg: { fg: $theme.lavender attr: u }
+    header: { fg: $theme.text attr: b }
+    row_index: $scheme.virtual_text
+    record: $theme.text
+    list: $theme.text
+    hints: $scheme.virtual_text
+    search_result: { fg: $theme.base bg: $theme.yellow }
+    shape_closure: $theme.teal
+    closure: $theme.teal
+    shape_flag: { fg: $theme.maroon attr: i }
+    shape_matching_brackets: { attr: u }
+    shape_garbage: $theme.red
+    shape_keyword: $theme.mauve
+    shape_match_pattern: $theme.green
+    shape_signature: $theme.teal
+    shape_table: $scheme.punctuation
+    cell-path: $scheme.punctuation
+    shape_list: $scheme.punctuation
+    shape_record: $scheme.punctuation
+    shape_vardecl: $scheme.variable
+    shape_variable: $scheme.variable
+    empty: { attr: n }
+    # Dynamic coloring based on size/duration/time
+    filesize: {||
+        if $in < 1kb { $theme.teal } else if $in < 10kb { $theme.green } else if $in < 100kb { $theme.yellow } else if $in < 10mb { $theme.peach } else if $in < 100mb { $theme.maroon } else if $in < 1gb { $theme.red } else { $theme.mauve }
+    }
+    duration: {||
+        if $in < 1day { $theme.teal } else if $in < 1wk { $theme.green } else if $in < 4wk { $theme.yellow } else if $in < 12wk { $theme.peach } else if $in < 24wk { $theme.maroon } else if $in < 52wk { $theme.red } else { $theme.mauve }
+    }
+    datetime: {|| (date now) - $in |
+        if $in < 1day { $theme.teal } else if $in < 1wk { $theme.green } else if $in < 4wk { $theme.yellow } else if $in < 12wk { $theme.peach } else if $in < 24wk { $theme.maroon } else if $in < 52wk { $theme.red } else { $theme.mauve }
+    }
+    shape_external: $scheme.unrecognized_command
+    shape_internalcall: $scheme.recognized_command
+    shape_external_resolved: $scheme.recognized_command
+    shape_block: $scheme.recognized_command
+    block: $scheme.recognized_command
+    shape_custom: $theme.pink
+    custom: $theme.pink
+    background: $theme.base
+    foreground: $theme.text
+    cursor: { bg: $theme.rosewater fg: $theme.base }
+    shape_range: $scheme.operator
+    range: $scheme.operator
+    shape_pipe: $scheme.operator
+    shape_operator: $scheme.operator
+    shape_redirection: $scheme.operator
+    glob: $scheme.filepath
+    shape_directory: $scheme.filepath
+    shape_filepath: $scheme.filepath
+    shape_glob_interpolation: $scheme.filepath
+    shape_globpattern: $scheme.filepath
+    shape_int: $scheme.constant
+    int: $scheme.constant
+    bool: $scheme.constant
+    float: $scheme.constant
+    nothing: $scheme.constant
+    binary: $scheme.constant
+    shape_nothing: $scheme.constant
+    shape_bool: $scheme.constant
+    shape_float: $scheme.constant
+    shape_binary: $scheme.constant
+    shape_datetime: $scheme.constant
+    shape_literal: $scheme.constant
+    string: $scheme.string
+    shape_string: $scheme.string
+    shape_string_interpolation: $theme.flamingo
+    shape_raw_string: $scheme.string
+    shape_externalarg: $scheme.string
+}
+
+# Build the Explore configuration using theme variables
+let catppuccin_explore_config = {
+    status_bar_background: { fg: $theme.text, bg: $theme.mantle },
+    command_bar_text: { fg: $theme.text },
+    highlight: { fg: $theme.base, bg: $theme.yellow },
+    status: {
+        error: $theme.red,
+        warn: $theme.yellow,
+        info: $theme.blue,
+    },
+    selected_cell: { bg: $theme.blue fg: $theme.base },
+}
+
+# >>>>>>>>>>>>>>>>>>>>>>> MAIN CONFIGURATION >>>>>>>>>>>>>>>>>>>>>>>>
 $env.config = {
     show_banner: false
 
     ls: {
-        use_ls_colors: true # use the LS_COLORS environment variable to colorize output
-        clickable_links: true # enable or disable clickable links. Your terminal has to support links.
+        use_ls_colors: true 
+        clickable_links: true
     }
 
     rm: {
-        always_trash: false # always act as if -t was given. Can be overridden with -p
+        always_trash: false 
     }
 
     table: {
-        mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
-        index_mode: always # "always" show indexes, "never" show indexes, "auto" = show indexes when a table has "index" column
-        show_empty: true # show 'empty list' and 'empty record' placeholders for command output
-        padding: { left: 1, right: 1 } # a left right padding of each column in a table
+        mode: rounded 
+        index_mode: always 
+        show_empty: true 
+        padding: { left: 1, right: 1 } 
         trim: {
-            methodology: wrapping # wrapping or truncating
-            wrapping_try_keep_words: true # A strategy used by the 'wrapping' methodology
-            truncating_suffix: "..." # A suffix used by the 'truncating' methodology
+            methodology: wrapping 
+            wrapping_try_keep_words: true 
+            truncating_suffix: "..." 
         }
-        header_on_separator: false # show header text on separator/border line
-        # abbreviated_row_count: 10 # limit data rows from top and bottom after reaching a set point
+        header_on_separator: false 
     }
 
-    error_style: "fancy" # "fancy" or "plain" for screen reader-friendly error messages
+    error_style: "fancy" 
 
-    # datetime_format determines what a datetime rendered in the shell would look like.
-    # Behavior without this configuration point will be to "humanize" the datetime display,
-    # showing something like "a day ago."
-    datetime_format: {
-        # normal: '%a, %d %b %Y %H:%M:%S %z'    # shows up in displays of variables or other datetime's outside of tables
-        # table: '%m/%d/%y %I:%M:%S%p'          # generally shows up in tabular outputs such as ls. commenting this out will change it to the default human readable datetime format
-    }
+    datetime_format: {}
 
-    explore: {
-        status_bar_background: { fg: "#1D1F21", bg: "#C4C9C6" },
-        command_bar_text: { fg: "#C4C9C6" },
-        highlight: { fg: "black", bg: "yellow" },
-        status: {
-            error: { fg: "white", bg: "red" },
-            warn: {}
-            info: {}
-        },
-        selected_cell: { bg: light_blue },
-    }
+    explore: $catppuccin_explore_config
 
     history: {
-        max_size: 100_000 # Session has to be reloaded for this to take effect
-        sync_on_enter: true # Enable to share history between multiple sessions, else you have to close the session to write history to file
-        file_format: "plaintext" # "sqlite" or "plaintext"
-        isolation: false # only available with sqlite file_format. true enables history isolation, false disables it. true will allow the history to be isolated to the current session using up/down arrows. false will allow the history to be shared across all sessions.
+        max_size: 100_000 
+        sync_on_enter: true 
+        file_format: "plaintext" 
+        isolation: false 
     }
 
     completions: {
-        case_sensitive: false # set to true to enable case-sensitive completions
-        quick: true    # set this to false to prevent auto-selecting completions when only one remains
-        partial: true    # set this to false to prevent partial filling of the prompt
-        algorithm: "prefix"    # prefix or fuzzy
+        case_sensitive: false 
+        quick: true    
+        partial: true    
+        algorithm: "prefix"    
         external: {
-            enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
-            max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            enable: true 
+            max_results: 100 
+            completer: null 
         }
-        use_ls_colors: true # set this to true to enable file/path/directory completions using LS_COLORS
+        use_ls_colors: true 
     }
-
 
     cursor_shape: {
-        emacs: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (line is the default)
-        vi_insert: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (block is the default)
-        vi_normal: underscore # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
+        emacs: block 
+        vi_insert: block 
+        vi_normal: underscore 
     }
 
-    color_config: $catppuccin_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    float_precision: 2 # the precision for displaying floats in tables
-    buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
+    color_config: $catppuccin_color_config
+    
+    float_precision: 2 
+    buffer_editor: "" 
     use_ansi_coloring: true
-    bracketed_paste: true # enable bracketed paste, currently useless on windows
-    edit_mode: vi # emacs, vi
+    bracketed_paste: true 
+    edit_mode: vi 
+    
     shell_integration: {
-        # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
         osc2: true
-        # osc7 is a way to communicate the path to the terminal, this is helpful for spawning new tabs in the same directory
         osc7: true
-        # osc8 is also implemented as the deprecated setting ls.show_clickable_links, it shows clickable links in ls output if your terminal supports it. show_clickable_links is deprecated in favor of osc8
         osc8: true
-        # osc9_9 is from ConEmu and is starting to get wider support. It's similar to osc7 in that it communicates the path to the terminal
         osc9_9: false
-        # osc133 is several escapes invented by Final Term which include the supported ones below.
-        # 133;A - Mark prompt start
-        # 133;B - Mark prompt end
-        # 133;C - Mark pre-execution
-        # 133;D;exit - Mark execution finished with exit code
-        # This is used to enable terminals to know where the prompt is, the command is, where the command finishes, and where the output of the command is
         osc133: true
-        # osc633 is closely related to osc133 but only exists in visual studio code (vscode) and supports their shell integration features
-        # 633;A - Mark prompt start
-        # 633;B - Mark prompt end
-        # 633;C - Mark pre-execution
-        # 633;D;exit - Mark execution finished with exit code
-        # 633;E - NOT IMPLEMENTED - Explicitly set the command line with an optional nonce
-        # 633;P;Cwd=<path> - Mark the current working directory and communicate it to the terminal
-        # and also helps with the run recent menu in vscode
         osc633: true
-        # reset_application_mode is escape \x1b[?1l and was added to help ssh work better
         reset_application_mode: true
     }
-    render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
-    use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
-    highlight_resolved_externals: false # true enables highlighting of external commands in the repl resolved by which.
-    recursion_limit: 50 # the maximum number of times nushell allows recursion before stopping it
+    
+    render_right_prompt_on_last_line: false 
+    use_kitty_protocol: false 
+    highlight_resolved_externals: true 
+    recursion_limit: 50 
 
-    plugins: {} # Per-plugin configuration. See https://www.nushell.sh/contributor-book/plugins.html#configuration.
+    plugins: {} 
 
     plugin_gc: {
-        # Configuration for plugin garbage collection
         default: {
-            enabled: true # true to enable stopping of inactive plugins
-            stop_after: 10sec # how long to wait after a plugin is inactive to stop it
+            enabled: true 
+            stop_after: 10sec 
         }
-        plugins: {
-            # alternate configuration for specific plugins, by name, for example:
-            #
-            # gstat: {
-            #     enabled: false
-            # }
-        }
+        plugins: {}
     }
 
     hooks: {
@@ -225,17 +241,15 @@ $env.config = {
                 }
             } catch {}
         }]
-        pre_execution: [{ null }] # run before the repl input is run
+        pre_execution: [{ null }] 
         env_change: {
-            PWD: [{|before, after| null }] # run if the PWD environment is different since the last repl input
+            PWD: [{|before, after| null }] 
         }
-        display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
-        command_not_found: { null } # return an error message when a command is not found
+        display_output: "if (term size).columns >= 100 { table -e } else { table }" 
+        command_not_found: { null } 
     }
 
     menus: [
-        # Configuration for default nushell menus
-        # Note the lack of source parameter
         {
             name: completion_menu
             only_buffer_difference: false
@@ -243,13 +257,13 @@ $env.config = {
             type: {
                 layout: columnar
                 columns: 4
-                col_width: 20     # Optional value. If missing all the screen width is used to calculate column width
+                col_width: 20
                 col_padding: 2
             }
             style: {
-                text: green
-                selected_text: { attr: r }
-                description_text: yellow
+                text: $theme.green
+                selected_text: { fg: $theme.base bg: $theme.green attr: b }
+                description_text: $theme.yellow
                 match_text: { attr: u }
                 selected_match_text: { attr: ur }
             }
@@ -262,7 +276,7 @@ $env.config = {
                 layout: ide
                 min_completion_width: 0,
                 max_completion_width: 50,
-                max_completion_height: 10, # will be limited by the available lines in the terminal
+                max_completion_height: 10,
                 padding: 0,
                 border: true,
                 cursor_offset: 0,
@@ -271,18 +285,12 @@ $env.config = {
                 max_description_width: 50
                 max_description_height: 10
                 description_offset: 1
-                # If true, the cursor pos will be corrected, so the suggestions match up with the typed text
-                #
-                # C:\> str
-                #      str join
-                #      str trim
-                #      str split
                 correct_cursor_pos: false
             }
             style: {
-                text: green
-                selected_text: { attr: r }
-                description_text: yellow
+                text: $theme.green
+                selected_text: { fg: $theme.base bg: $theme.green attr: b }
+                description_text: $theme.yellow
                 match_text: { attr: u }
                 selected_match_text: { attr: ur }
             }
@@ -296,9 +304,9 @@ $env.config = {
                 page_size: 10
             }
             style: {
-                text: green
-                selected_text: green_reverse
-                description_text: yellow
+                text: $theme.green
+                selected_text: { fg: $theme.base bg: $theme.green attr: b }
+                description_text: $theme.yellow
             }
         }
         {
@@ -308,15 +316,15 @@ $env.config = {
             type: {
                 layout: description
                 columns: 4
-                col_width: 20     # Optional value. If missing all the screen width is used to calculate column width
+                col_width: 20
                 col_padding: 2
                 selection_rows: 4
                 description_rows: 10
             }
             style: {
-                text: green
-                selected_text: green_reverse
-                description_text: yellow
+                text: $theme.green
+                selected_text: { fg: $theme.base bg: $theme.green attr: b }
+                description_text: $theme.yellow
             }
         }
     ]
@@ -400,7 +408,7 @@ $env.config = {
             modifier: none
             keycode: escape
             mode: [emacs, vi_normal, vi_insert]
-            event: { send: esc }    # NOTE: does not appear to work
+            event: { send: esc }
         }
         {
             name: cancel_command
@@ -798,20 +806,12 @@ $env.config = {
             mode: emacs
             event: { edit: capitalizechar }
         }
-        # The following bindings with `*system` events require that Nushell has
-        # been compiled with the `system-clipboard` feature.
-        # This should be the case for Windows, macOS, and most Linux distributions
-        # Not available for example on Android (termux)
-        # If you want to use the system clipboard for visual selection or to
-        # paste directly, uncomment the respective lines and replace the version
-        # using the internal clipboard.
         {
             name: copy_selection
             modifier: control_shift
             keycode: char_c
             mode: emacs
             event: { edit: copyselection }
-            # event: { edit: copyselectionsystem }
         }
         {
             name: cut_selection
@@ -819,15 +819,7 @@ $env.config = {
             keycode: char_x
             mode: emacs
             event: { edit: cutselection }
-            # event: { edit: cutselectionsystem }
         }
-        # {
-        #     name: paste_system
-        #     modifier: control_shift
-        #     keycode: char_v
-        #     mode: emacs
-        #     event: { edit: pastesystem }
-        # }
         {
             name: select_all
             modifier: control_shift
@@ -848,7 +840,6 @@ alias c = clear
 alias ll = ls -l
 alias lt = eza --tree --level=2 --long --icons --git
 alias v = nvim
-alias hms = /nix/store/6kc5srg83nkyg21am089xx7pvq44kn2c-home-manager/bin/home-manager switch
 alias as = aerospace
 alias asr = atuin scripts run
 

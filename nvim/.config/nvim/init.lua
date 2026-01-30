@@ -772,6 +772,11 @@ require('lazy').setup({
             enabled = true,
           },
         },
+        color_overrides = {
+          mocha = {
+            base = '#181825', -- Mantle color, darker than the usual base
+          },
+        },
         custom_highlights = function(colors)
           return {
 
