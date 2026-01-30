@@ -112,7 +112,7 @@
   },
 
   "network#icon": {
-    "format-wifi": "WIFI {essid}",
+    "format-wifi": "WIFI",
     "format-ethernet": "ETH",
     "format-disconnected": "DISC",
     "tooltip-format": "{ifname} ({essid})\n⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}\nSignal: {signalStrength}%",
