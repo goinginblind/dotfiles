@@ -772,20 +772,7 @@ require('lazy').setup({
             enabled = true,
           },
         },
-        color_overrides = {
-          mocha = {
-            -- All the colors are down-shifted one tone
-            subtext1 = '#a6adc8', -- this
-            subtext0 = '#9399b2', -- and this don't really affect anything it seems
-            overlay2 = '#7f849c',
-            overlay1 = '#6c7086',
-            overlay0 = '#585b70',
-            surface2 = '#45475a',
-            surface1 = '#313244',
-            surface0 = '#1e1e2e',
-            base = '#181825', -- Mantle color, one tone down from usual base
-          },
-        },
+
         custom_highlights = function(colors)
           return {
 
