@@ -11,19 +11,19 @@ right_format = """$git_branch$git_status$cmd_duration"""
 success_symbol = '[>](bold teal)'
 error_symbol = '[x](bold red)'
 # Vim mode indicator
-vicmd_symbol = "[V](bold teal)"
+vicmd_symbol = "[vi](bold teal)"
 
 [directory]
 style = "bold teal"
-read_only = " "
+read_only = " [RO]"
 truncation_length = 4
-truncation_symbol = ".../"
+truncation_symbol = "../"
 
 [directory.substitutions]
 '~/tests/starship-custom' = 'work-project'
 
 [git_branch]
-symbol = " "
+symbol = ""
 style = "bold mauve"
 format = '[$symbol$branch]($style) '
 
@@ -31,15 +31,15 @@ format = '[$symbol$branch]($style) '
 style = "bold peach"
 format = '([$all_status$ahead_behind]($style) )'
 conflicted = ' '                             # Git conflict
-ahead = '⇡'                                   # Ahead of remote
-behind = '⇣'                                  # Behind remote
+ahead = '↑'                                   # Ahead of remote
+behind = '↓'                                  # Behind remote
 diverged = '⇕'                                # Diverged
 untracked = '?'                               # Untracked files
-stashed = ' '                                # Stashed changes (Box/Package icon)
+stashed = '$ '                                # Stashed changes (Box/Package icon)
 modified = '!'                                # Modified files
 staged = '+'                                  # Staged files
-renamed = '»'                                 # Renamed files
-deleted = '󰆴'                                 # Deleted files
+renamed = 'r'                                 # Renamed files
+deleted = 'x'                                 # Deleted files
 
 [cmd_duration]
 min_time = 2000
