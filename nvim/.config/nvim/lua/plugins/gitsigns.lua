@@ -4,10 +4,10 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     -- signs configuration
     signs = {
       add = { text = '+' },
-      change = { text = '' },
+      change = { text = '~' },
       delete = { text = '_' },
       topdelete = { text = '‾' },
-      changedelete = { text = '' },
+      changedelete = { text = '~' },
     },
     -- on_attach configuration
     on_attach = function(bufnr)
