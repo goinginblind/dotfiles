@@ -1,9 +1,12 @@
 -- Set the default shell to be bash
 vim.o.shell = '/usr/bin/bash'
 
--- Set conceallevel to 1, .md files require this to be set to 2
+-- Set conceallevel to 0, .md files require this to be set to 2
 -- to provide the nicer 'view' look similiar to Obsidian
-vim.o.conceallevel = 1
+vim.o.conceallevel = 0
+
+-- Set global statusline for all the splits
+vim.opt.laststatus = 3
 
 -- [[ Setting options ]]
 -- See :help vim.o

@@ -1,6 +1,6 @@
 return {
   'obsidian-nvim/obsidian.nvim',
-  version = '', -- recommended, use latest release instead of latest commit
+  version = '*', -- recommended, use latest release instead of latest commit
   event = {
     'BufReadPre ' .. vim.fn.expand '~' .. '/Documents/Obsidian/main/*.md',
     'BufNewFile ' .. vim.fn.expand '' .. '/Documents/Obsidian/main/*.md',
@@ -12,7 +12,7 @@ return {
     workspaces = {
       {
         name = 'main',
-        path = '/Documents/Obsidian/main',
+        path = '~/Documents/Obsidian/main',
       },
     },
     -- This allows for all the ghost notes to lead into specified folder
@@ -24,7 +24,7 @@ return {
     -- folder, still prompts for the name of the pasted images - useful when you paste
     -- a screenshot - their names are usually 2025-10-11-17-36-12.png or something like that.
     attachments = {
-      img_folder = 'files',
+      folder = 'files',
     },
 
     -- Here we have a small function that makes the id of the note
