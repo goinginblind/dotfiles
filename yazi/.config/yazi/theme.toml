@@ -4,8 +4,8 @@ overall = { bg = "#1e1e2e" }
 [mgr]
 cwd = { fg = "#94e2d5" }
 
-find_keyword  = { fg = "#f9e2af", italic = true }
-find_position = { fg = "#f5c2e7", bg = "reset", italic = true }
+find_keyword  = { fg = "#1e1e2e", bg = "#f9e2af", italic = false }
+find_position = { fg = "#f5c2e7", bg = "reset", italic = false }
 
 marker_copied   = { fg = "#a6e3a1", bg = "#a6e3a1" }
 marker_cut      = { fg = "#f38ba8", bg = "#f38ba8" }
@@ -22,17 +22,17 @@ border_style  = { fg = "#7f849c" }
 syntect_theme = "~/.config/yazi/Catppuccin-mocha.tmTheme"
 
 [tabs]
-active   = { fg = "#1e1e2e", bg = "#cdd6f4", bold = true }
+active   = { fg = "#1e1e2e", bg = "#cdd6f4", bold = false }
 inactive = { fg = "#cdd6f4", bg = "#45475a" }
 
 [mode]
-normal_main = { fg = "#1e1e2e", bg = "#89b4fa", bold = true }
+normal_main = { fg = "#1e1e2e", bg = "#89b4fa", bold = false }
 normal_alt  = { fg = "#89b4fa", bg = "#313244"}
 
-select_main = { fg = "#1e1e2e", bg = "#a6e3a1", bold = true }
+select_main = { fg = "#1e1e2e", bg = "#a6e3a1", bold = false }
 select_alt  = { fg = "#a6e3a1", bg = "#313244"}
 
-unset_main  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
+unset_main  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = false }
 unset_alt   = { fg = "#f2cdcd", bg = "#313244"}
 
 [indicator]
@@ -42,10 +42,11 @@ preview = { fg = "#1e1e2e", bg = "#cdd6f4" }
 padding = { open = "█", close = "█" }
 
 [status]
+overall = { bg = "#181825" }
 sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
-progress_label  = { fg = "#ffffff", bold = true }
+progress_label  = { fg = "#ffffff", bold = false }
 progress_normal = { fg = "#a6e3a1", bg = "#45475a" }
 progress_error  = { fg = "#f9e2af", bg = "#f38ba8" }
 
@@ -80,7 +81,7 @@ border = { fg = "#89b4fa" }
 [tasks]
 border  = { fg = "#89b4fa" }
 title   = {}
-hovered = { fg = "#f5c2e7", bold = true }
+hovered = { fg = "#f5c2e7", bold = false }
 
 [which]
 mask            = { bg = "#313244" }
@@ -94,7 +95,7 @@ separator_style = { fg = "#585b70" }
 on      = { fg = "#94e2d5" }
 run     = { fg = "#f5c2e7" }
 desc    = { fg = "#9399b2" }
-hovered = { bg = "#585b70", bold = true }
+hovered = { bg = "#585b70", bold = false }
 footer  = { fg = "#cdd6f4", bg = "#45475a" }
 
 [notify]
@@ -134,7 +135,7 @@ rules = [
 border = { fg = "#89b4fa" }
 title  = { fg = "#89b4fa" }
 tbl_cell = { fg = "#89b4fa", reversed = true }
-tbl_col = { bold = true }
+tbl_col = { bold = false }
 
 [icon]
 files = [
