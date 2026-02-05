@@ -6,6 +6,3 @@ vim.opt_local.tabstop = 2
 
 -- Set the number of spaces used for each step of (auto)indent
 vim.opt_local.shiftwidth = 2
-
--- Enable C-style indentation rules
-vim.opt_local.cindent = true
