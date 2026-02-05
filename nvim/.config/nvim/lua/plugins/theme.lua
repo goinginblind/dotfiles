@@ -10,6 +10,7 @@ return { -- Setup colorscheme to Catppuccin Mocha
       },
       auto_integrations = false,
       no_italic = true,
+      no_bold = true,
       integrations = {
         cmp = true,
         gitsigns = true,

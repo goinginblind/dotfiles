@@ -3,7 +3,7 @@ return {
   version = '*', -- recommended, use latest release instead of latest commit
   event = {
     'BufReadPre ' .. vim.fn.expand '~' .. '/Documents/Obsidian/main/*.md',
-    'BufNewFile ' .. vim.fn.expand '' .. '/Documents/Obsidian/main/*.md',
+    'BufNewFile ' .. vim.fn.expand '~' .. '/Documents/Obsidian/main/*.md',
   },
   ---@module 'obsidian'
   ---@type obsidian.config
