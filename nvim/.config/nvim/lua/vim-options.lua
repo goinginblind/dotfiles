@@ -1,8 +1,7 @@
 -- Set the default shell to be bash
 vim.o.shell = '/usr/bin/bash'
 
--- Set conceallevel to 0, .md files require this to be set to 2
--- to provide the nicer 'view' look similiar to Obsidian
+-- Set conceallevel to 0, .md files are set to 2 in the ftplugin/markdown.lua
 vim.o.conceallevel = 0
 
 -- Set global statusline for all the splits
@@ -14,6 +13,7 @@ vim.opt.laststatus = 3
 
 -- Make line numbers default
 vim.o.number = true
+
 -- You can also add relative line numbers, to help with jumping.
 vim.o.relativenumber = true
 
