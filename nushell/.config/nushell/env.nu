@@ -15,3 +15,9 @@
 # Also see `help config env` for more options.
 #
 # You can remove these comments if you want or leave
+
+# Mise for languages
+source ~/.config/nushell/mise.nu
+
+# For the VPN utility
+source ~/.config/nushell/vpn.nu

@@ -850,25 +850,26 @@ def ff [] {
 source ~/.config/nushell/env.nu
 
 let ruby_ver = "3.4.0"
-let gem_home = ($nu.home-path | path join ".gem" "ruby" $ruby_ver)
+let gem_home = ($nu.home-dir | path join ".gem" "ruby" $ruby_ver)
 let gem_bin = ($gem_home | path join "bin")
 
 # Set GEM paths
 $env.GEM_HOME = $gem_home
 $env.GEM_PATH = $gem_home
 
-# Add gem bin to PATH if it exists
+# Add gem bin to path if it exists
 if ($gem_bin | path exists) {
   $env.PATH = ($env.PATH | prepend $gem_bin)
 }
 $env.DIRENV_LOG_FORMAT = ""
 
-# For the VPN utility
-source ~/.config/nushell/vpn.nu
-source $"($nu.home-path)/.cargo/env.nu"
+source $"($nu.home-dir)/.cargo/env.nu"
 
 # Disable Nushell's default prompt indicators (let Starship handle it)
 $env.PROMPT_INDICATOR = {|| "" }
 $env.PROMPT_INDICATOR_VI_INSERT = {|| "" }
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| "" }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
+
+# Add bin stuff to path
+$env.PATH = ($env.PATH | prepend $"($env.HOME)/.local/bin")
