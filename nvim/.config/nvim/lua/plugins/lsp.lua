@@ -236,15 +236,7 @@ return {
             },
           },
         },
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = 'strict',
-              },
-            },
-          },
-        },
+        pyright = {},
         ruff = {},
         lua_ls = {
           settings = {

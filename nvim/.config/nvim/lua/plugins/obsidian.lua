@@ -20,6 +20,11 @@ return {
     notes_subdir = 'notes',
     new_notes_location = 'notes_subdir',
 
+    templates = {
+      folder = 'templates',
+      date_format = '%Y-%m-%d-%a',
+      time_format = '%H:%M',
+    },
     -- Almost the same as the above - just that the media files are saved in the 'files'
     -- folder, still prompts for the name of the pasted images - useful when you paste
     -- a screenshot - their names are usually 2025-10-11-17-36-12.png or something like that.

@@ -34,7 +34,7 @@ return { -- Autoformat
       lua = { 'stylua' },
       go = { 'goimports', 'gofumpt' },
       rust = { 'rustfmt' },
-      python = { 'isort', 'black' },
+      python = { 'ruff_format' },
       c = { 'clang_format' },
       cpp = { 'clang_format' },
       -- Conform can also run multiple formatters sequentially

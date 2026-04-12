@@ -14,6 +14,9 @@ vim.opt.laststatus = 3
 -- Make line numbers default
 vim.o.number = true
 
+-- Get rid of '~' symbols at the EOF
+vim.opt.fillchars = { eob = ' ' }
+
 -- You can also add relative line numbers, to help with jumping.
 vim.o.relativenumber = true
 

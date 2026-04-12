@@ -28,7 +28,15 @@ rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 -- Check for a "lua/plugins" directory and load all files inside it
-require('lazy').setup({ { import = 'plugins' } }, { ui = { border = 'rounded', backdrop = 100 } })
+require('lazy').setup({
+  { import = 'plugins' },
+}, {
+  ui = {
+    border = 'rounded',
+    backdrop = 100,
+  },
+  change_detection = { notify = false },
+})
 
 -- :help modeline
 -- vim: ts=2 sts=2 sw=2 et

@@ -9,8 +9,6 @@ return { -- Setup colorscheme to Catppuccin Mocha
         solid = false,
       },
       auto_integrations = false,
-      no_italic = true,
-      no_bold = true,
       integrations = {
         cmp = true,
         gitsigns = true,
@@ -41,15 +39,18 @@ return { -- Setup colorscheme to Catppuccin Mocha
           BlinkCmpSignatureHelpBorder = { fg = colors.blue, bg = colors.base },
 
           -- Markdown styling
-          ['@markup.italic'] = { fg = colors.green, italic = true }, -- italics
-          ['@markup.italic.markdown_inline'] = { fg = colors.green, italic = true },
-
-          ['@markup.strong'] = { fg = colors.sky, bold = true }, -- bold
-          ['@markup.strong.markdown_inline'] = { fg = colors.sky, bold = true },
-
-          ['@markup.italic.strong.markdown_inline'] = { fg = colors.yellow, bold = true, italic = true }, -- bold italics
-
-          ['@markup.quote.markdown'] = { fg = colors.text }, -- quotes
+          -- ['@markup.italic'] = { fg = colors.green, italic = true }, -- italics
+          -- ['@markup.italic.markdown_inline'] = { fg = colors.green, italic = true },
+          --
+          -- ['@markup.strong'] = { fg = colors.sky, bold = true }, -- bold
+          -- ['@markup.strong.markdown_inline'] = { fg = colors.sky, bold = true },
+          --
+          -- ['@markup.italic.strong.markdown_inline'] = { fg = colors.yellow, bold = true, italic = true }, -- bold italics
+          --
+          -- ['@markup.quote.markdown'] = { fg = colors.text }, -- quotes
+          --
+          -- ['@markup.raw.block.markdown'] = { fg = colors.mauve }, -- .md code blocks
+          -- ['@markup.raw.markdown_inline'] = { fg = colors.mauve }, -- inline .md code blocks
         }
       end,
     }
