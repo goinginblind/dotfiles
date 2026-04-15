@@ -72,6 +72,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --  the definition of its *type*, not where it was *defined*.
     map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+    -- TODO: this kind of client call is deprecated and useless.
+    -- So needs to be actually replaced with client.supports_method, neovim 0.12 supports it all fine
+    -- as is, no need to do this shit below.
+    --
     -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
     ---@param client vim.lsp.Client
     ---@param method vim.lsp.protocol.Method

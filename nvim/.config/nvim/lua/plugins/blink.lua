@@ -112,8 +112,20 @@ local kind_groups = {
   'BlinkCmpKindTypeParameter',
 }
 
--- Force transparency for each kind icon group, else the icons will have a background forced
--- from some other place
-for _, group in ipairs(kind_groups) do
-  vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
+local function apply_blink_kind_transparency()
+  for _, group in ipairs(kind_groups) do
+    vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
+  end
 end
+
+-- Run immediately so :source works; also register for startup and colorscheme changes
+apply_blink_kind_transparency()
+-- Blink defers its own highlight init via vim.schedule, so we schedule after VimEnter
+-- to ensure we run after blink's deferred setup has completed
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.schedule(apply_blink_kind_transparency)
+  end,
+})
+-- Re-apply if the colorscheme changes later
+vim.api.nvim_create_autocmd('ColorScheme', { callback = apply_blink_kind_transparency })
