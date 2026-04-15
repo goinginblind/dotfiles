@@ -1,59 +1,22 @@
-return { -- Setup colorscheme to Catppuccin Mocha
-  'catppuccin/nvim',
-  priority = 1000,
-  config = function()
-    require('catppuccin').setup {
-      flavour = 'mocha',
-      float = {
-        transparent = true,
-        solid = false,
-      },
-      auto_integrations = false,
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        mini = {
-          enabled = true,
-        },
-        telescope = {
-          enabled = true,
-        },
-        blink_cmp = {
-          style = 'bordered',
-        },
-        dap = true,
-        which_key = true,
-        fidget = true,
-        mason = true,
-      },
+-- No colorscheme plugin — stock Neovim theme is used.
+-- This file only applies transparency overrides so the terminal background shows through.
 
-      custom_highlights = function(colors)
-        return {
-          BlinkCmpMenu = { bg = colors.base }, -- Main Completion Menu
-          BlinkCmpMenuBorder = { fg = colors.blue, bg = colors.base },
+local function apply_transparency()
+  -- Main editor windows
+  vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'NONE' })
 
-          BlinkCmpDoc = { bg = colors.base }, -- Documentation Popup
-          BlinkCmpDocBorder = { fg = colors.blue, bg = colors.base },
+  -- Gutter
+  vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LineNr', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LineNrAbove', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LineNrBelow', { bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = 'NONE' })
+end
 
-          BlinkCmpSignatureHelp = { bg = colors.base }, -- Signature Help
-          BlinkCmpSignatureHelpBorder = { fg = colors.blue, bg = colors.base },
+apply_transparency()
 
-          -- Markdown styling
-          -- ['@markup.italic'] = { fg = colors.green, italic = true }, -- italics
-          -- ['@markup.italic.markdown_inline'] = { fg = colors.green, italic = true },
-          --
-          -- ['@markup.strong'] = { fg = colors.sky, bold = true }, -- bold
-          -- ['@markup.strong.markdown_inline'] = { fg = colors.sky, bold = true },
-          --
-          -- ['@markup.italic.strong.markdown_inline'] = { fg = colors.yellow, bold = true, italic = true }, -- bold italics
-          --
-          -- ['@markup.quote.markdown'] = { fg = colors.text }, -- quotes
-          --
-          -- ['@markup.raw.block.markdown'] = { fg = colors.mauve }, -- .md code blocks
-          -- ['@markup.raw.markdown_inline'] = { fg = colors.mauve }, -- inline .md code blocks
-        }
-      end,
-    }
-    vim.cmd.colorscheme 'catppuccin'
-  end,
-}
+-- Re-apply if the user or a plugin changes the colorscheme later
+vim.api.nvim_create_autocmd('ColorScheme', { callback = apply_transparency })

@@ -1,5 +1,10 @@
--- Set the default shell to be bash
-vim.o.shell = '/usr/bin/bash'
+-- Set the default shell to be zsh
+local handle = io.popen 'which zsh'
+local path = handle:read('*a'):gsub('%s+$', '')
+handle:close()
+if path ~= '' then
+  vim.o.shell = path
+end
 
 -- Set conceallevel to 0, .md files are set to 2 in the ftplugin/markdown.lua
 vim.o.conceallevel = 0
