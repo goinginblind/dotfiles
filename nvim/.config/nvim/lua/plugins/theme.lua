@@ -1,13 +1,18 @@
--- No colorscheme plugin — stock Neovim theme is used.
--- This file only applies transparency overrides so the terminal background shows through.
+require('catppuccin').setup {
+  flavour = 'mocha',
+  float = {
+    transparent = true,
+    solid = false,
+  },
+  auto_integrations = true,
+}
 
+vim.cmd.colorscheme 'catppuccin'
+
+-- Re-apply transparency overrides after colorscheme loads.
+-- Catppuccin's transparent mode handles Normal/NormalFloat, but these
+-- ensure the gutter and edge-of-buffer areas also stay transparent.
 local function apply_transparency()
-  -- Main editor windows
-  vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
-  vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'NONE' })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
-  vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'NONE' })
-
   -- Gutter
   vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'NONE' })
   vim.api.nvim_set_hl(0, 'LineNr', { bg = 'NONE' })

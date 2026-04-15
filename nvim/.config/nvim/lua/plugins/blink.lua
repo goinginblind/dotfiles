@@ -112,8 +112,18 @@ local kind_groups = {
   'BlinkCmpKindTypeParameter',
 }
 
+local additional_groups = {
+  'BlinkCmpLabel',
+  'BlinkCmpLabelDetail',
+  'BlinkCmpLabelDescription',
+}
+
 local function apply_blink_kind_transparency()
   for _, group in ipairs(kind_groups) do
+    vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
+  end
+
+  for _, group in ipairs(additional_groups) do
     vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
   end
 end

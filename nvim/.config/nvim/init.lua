@@ -35,6 +35,7 @@ local plugins = {
   -- Telescope
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
   -- Formatting
   { src = 'https://github.com/stevearc/conform.nvim' },
@@ -47,6 +48,9 @@ local plugins = {
   { src = 'https://github.com/NMAC427/guess-indent.nvim' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/folke/which-key.nvim' },
+
+  -- Theme
+  { src = 'https://github.com/catppuccin/nvim' },
 }
 
 -- Only install telescope-fzf-native when make is available
