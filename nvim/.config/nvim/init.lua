@@ -12,31 +12,66 @@ require 'vim-options'
 require 'keymaps'
 require 'autocommands'
 
--- [[ Install lazy.nvim plugin manager ]]
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
+-- [[ Install plugins via vim.pack ]]
+local plugins = {
+  -- Core dependencies
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+
+  -- LSP stack
+  { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+  { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/j-hui/fidget.nvim' },
+  { src = 'https://github.com/folke/lazydev.nvim' },
+
+  -- Completion
+  { src = 'https://github.com/L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
+  { src = 'https://github.com/saghen/blink.cmp' },
+
+  -- Treesitter
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+
+  -- Telescope
+  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
+
+  -- Formatting
+  { src = 'https://github.com/stevearc/conform.nvim' },
+
+  -- Git
+  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+
+  -- UI & editing utilities
+  { src = 'https://github.com/echasnovski/mini.nvim' },
+  { src = 'https://github.com/NMAC427/guess-indent.nvim' },
+  { src = 'https://github.com/windwp/nvim-autopairs' },
+  { src = 'https://github.com/folke/which-key.nvim' },
+}
+
+-- Only install telescope-fzf-native when make is available
+if vim.fn.executable 'make' == 1 then
+  table.insert(plugins, { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim', build = 'make' })
 end
 
----@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+-- Only install devicons when a Nerd Font is available
+if vim.g.have_nerd_font then
+  table.insert(plugins, { src = 'https://github.com/nvim-tree/nvim-web-devicons' })
+end
 
--- [[ Configure and install plugins ]]
--- Check for a "lua/plugins" directory and load all files inside it
-require('lazy').setup({
-  { import = 'plugins' },
-}, {
-  ui = {
-    border = 'rounded',
-    backdrop = 100,
-  },
-  change_detection = { notify = false },
-})
+vim.pack.add(plugins)
+
+-- [[ Configure plugins ]]
+-- Order matters: blink first (so capabilities are ready for LSP), then LSP, then everything else.
+require 'plugins.theme'
+require 'plugins.blink'
+require 'plugins.lsp'
+require 'plugins.treesitter'
+require 'plugins.conform'
+require 'plugins.gitsigns'
+require 'plugins.telescope'
+require 'plugins.mini'
+require 'plugins.misc'
 
 -- :help modeline
 -- vim: ts=2 sts=2 sw=2 et
