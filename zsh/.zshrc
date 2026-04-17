@@ -1,6 +1,12 @@
 # Editor by default
 export EDITOR="nvim"
 
+# Vi mode
+bindkey -v
+
+# Block style cursor
+echo -ne '\e[1 q'
+
 # History
 HISTSIZE=10000
 SAVEHIST=10000
