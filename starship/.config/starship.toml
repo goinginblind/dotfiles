@@ -7,14 +7,13 @@ format = """$directory$character"""
 right_format = """$git_branch$git_status$cmd_duration"""
 
 [character]
-# Teal for success to match Tmux, Red for error
-success_symbol = '[>](bold teal)'
+success_symbol = '[>](bold green)'
 error_symbol = '[x](bold red)'
 # Vim mode indicator
-vicmd_symbol = "[vi](bold teal)"
+vicmd_symbol = "[vi](bold yellow)"
 
 [directory]
-style = "bold teal"
+style = "bold green"
 read_only = " [RO]"
 truncation_length = 4
 truncation_symbol = "../"
