@@ -41,7 +41,7 @@ renamed = 'r'                                 # Renamed files
 deleted = 'x'                                 # Deleted files
 
 [cmd_duration]
-min_time = 2000
+min_time = 5000
 style = "surface1"
 format = '[$duration]($style) '
 
