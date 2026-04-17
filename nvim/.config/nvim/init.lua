@@ -50,7 +50,7 @@ local plugins = {
   { src = 'https://github.com/folke/which-key.nvim' },
 
   -- Theme
-  { src = 'https://github.com/catppuccin/nvim' },
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin.nvim' },
 }
 
 -- Only install telescope-fzf-native when make is available
